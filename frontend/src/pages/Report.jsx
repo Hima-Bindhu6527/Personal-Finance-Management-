@@ -539,21 +539,19 @@ const ReportPage = () => {
               </section>
 
               {/* Income Breakdown */}
-              {reportData.incomeBreakdown && (
+              {reportData.incomeBreakdown?.length > 0 && (
                 <section className="report-section">
-                  <h3 className="section-title">📈 Income Breakdown</h3>
+                  <h3 className="section-title">💸 Income Breakdown</h3>
                   <div className="breakdown-list">
-                    {Object.entries(reportData.incomeBreakdown).map(
-                      ([key, value]) =>
-                        value > 0 && (
-                          <div key={key} className="breakdown-item">
-                            <span className="breakdown-label">
-                              {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1")}
-                            </span>
-                            <span className="breakdown-value">{formatCurrency(value)}</span>
-                          </div>
-                        )
-                    )}
+                    {reportData.incomeBreakdown.map((expense, index) => (
+                      <div key={index} className="breakdown-item">
+                        <span className="breakdown-label">{expense.category}</span>
+                        <div className="breakdown-right">
+                          <span className="breakdown-value">{formatCurrency(expense.amount)}</span>
+                          <span className="breakdown-percentage">({formatPercentage(expense.percentage)})</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </section>
               )}
@@ -567,10 +565,7 @@ const ReportPage = () => {
                       <span className="breakdown-label">Mutual Funds</span>
                       <span className="breakdown-value">{formatCurrency(reportData.assetAllocation.mutualFunds)}</span>
                     </div>
-                    <div className="breakdown-item">
-                      <span className="breakdown-label">Insurance Coverage</span>
-                      <span className="breakdown-value">{formatCurrency(reportData.assetAllocation.insurance)}</span>
-                    </div>
+        
                     <div className="breakdown-item">
                       <span className="breakdown-label">Other Assets</span>
                       <span className="breakdown-value">{formatCurrency(reportData.assetAllocation.otherAssets)}</span>

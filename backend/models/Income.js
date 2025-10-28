@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// ✅ Income Subdocument Schema
+//  Income Subdocument Schema
 const incomeSourceSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -27,7 +27,7 @@ incomeSourceSchema.pre('save', function (next) {
   next();
 });
 
-// ✅ Expense Subdocument Schema
+//  Expense Subdocument Schema
 const expenseSchema = new mongoose.Schema({
   category: {
     type: String,
@@ -54,7 +54,7 @@ expenseSchema.pre('save', function (next) {
   next();
 });
 
-// ✅ Main IncomeExpense Schema
+//  Main IncomeExpense Schema
 const incomeExpenseSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
